@@ -134,6 +134,7 @@ public class ForAndWhile {
         } while (answer < min || answer >= max);
 
         System.out.println("Ваше число принято");
+        // while и do while исп-ся когда в условиях не участвуют счетчики
 
 
         /*
@@ -168,16 +169,19 @@ public class ForAndWhile {
             double currentPrice = quantity * price;
             System.out.println(quantity + "кг. " + " стоят " + currentPrice);
         }
+        // т.е. пока значение кол-ва не станет <=5 - будут выполняться инструкции в теле цикла
+        // каждый раз будет +1 к кол-ву
 
         /*
+        получить эти числа в таком порядке на экране
         1
         12
         123
         1234
         12345
-        123456 System.out.print(1);
+        123456
         */
-        // fori
+        // fori - среда сама напишет заготовку для for
         for (int first = 1; first <= 6; first++) {
             for (int second = 1; second <= first ; second++) {
                 System.out.print(second);
@@ -185,17 +189,45 @@ public class ForAndWhile {
             System.out.println();
         }
 
-        // ссылочный тип
-        char oneChar = '1';
-        String oneStr = "1";
-        String stringVar01 = "строка";
+        /*
+        System.out.print(1);
+        System.out.print(1) - выводы будут склеены вместе - 11
+        System.out.println(1) вывод будет с новой строчки
+         */
+
+        // ссылочный тип строки
+        char oneChar = '1'; // примитив - одна кавычка
+        String oneStr = "1"; // строчка - две кавычки
+        String stringVar01 = "строка"; // здесь будет ссылка на одно и то же значение у разных переменных
         String stringVar02 = "строка";
-        // String str01 = new String("строка");
+        // String str01 = new String("строка"); // через конструктор - отдельный объект строка
         // String str02 = new String("строка");
-        stringVar02 = stringVar02.toUpperCase(); // "СТРОКА"
+        stringVar02 = stringVar02.toUpperCase(); // "СТРОКА" //вызов метода приведения к верхнему регистру
+        // т.е. на основе существующей созд-ся новая строка и ссылка на новую строчку возвращается
+        // происходит перезапись переменной
+
+
         // сравнение
         System.out.println(stringVar01.equals(stringVar02));
         String s = null;
+        /*
+        ссылочные типы сравнивать через == нельзя
+        ссылаются ли эти две переменные на один объект или нет
+        значение переменных не имеет значения, сравниваются переменные
+        если мы к переменной со значением null попробуем вызвать какой-нибудь метод, то мы получим ошибку
+        s.isEmpty()-будет ошибка
+
+
+
+у примитивов не может быть null значения
+примитив либо инициализирован, либо нет
+ссылочные типы могут быть не инициализированы, может быть присвоено значение через ссылку
+в примере String s = null - null говорит, что переменная s не ссылается ни на какую строчку
+
+
+
+         */
+
 
         // heap
         // "строка"
