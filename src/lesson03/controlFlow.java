@@ -106,7 +106,17 @@ public class controlFlow {
         // если пользователь набрал меньше 80, он не занял никакого места.
         // Вывести в консоль, какое место занял пользователь.
 
-
+        public static void main(String[] args) {
+            int currentScoreValue = 89;
+            int firstPlace = 90;
+            int noPlace = 79;
+            if (currentScoreValue >= firstPlace) {
+                System.out.println("Вы заняли первое место");
+            } else if (currentScoreValue < firstPlace && currentScoreValue > noPlace) {
+                System.out.println("Вы заняли второе место");
+            } else if (currentScoreValue <= noPlace ) {
+                System.out.println("Вы не заняли никакого места");
+            }
 
 
         // I. SWITCH CASE
