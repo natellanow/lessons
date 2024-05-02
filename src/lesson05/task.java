@@ -170,6 +170,70 @@ abbyt - ytbab
 Дан массив целых чисел: int[] task02 = {88, 34, 12, 55, 90, 4, 10, 44}.
 Найти максимальную сумму четырёх смежных целых чисел в массиве task02.
 Использовать алгоритм скользящего окна.
+решение с использованием дополнительного метода public static int result(int[] nums), но не скользящее окно
+ */
+        public static void main(String[] args) {
+            int[] arr = {88, 34, 12, 55, 90, 4, 10, 44};
+            int maxSum = result(arr);
+            System.out.println("Максимальная сумма 4 смежных чисел: " + maxSum);
+        }
+        public static int result(int[] nums) {
+            if (nums == null || nums.length < 4)
+                throw new IllegalArgumentException("Массив должен содержать как минимум 4 элемента");
+            int maxSum = nums[0] + nums[1] + nums[2] + nums[3];
+            for (int i = 4; i < nums.length; i++) {
+                int currentSum = nums[i - 3] + nums[i - 2] + nums[i - 1] + nums[i];
+                if (currentSum > maxSum) {
+                    maxSum = currentSum;
+                }
+            }
+            return maxSum;
+        }
+
+/*
+без дополнительного метода
  */
 
+    public static void main(String[] args) {
+        int[] arr = {88, 34, 12, 55, 90, 4, 10, 44};
+        if (arr.length < 4) {
+            System.out.println("Массив должен содержать как минимум 4 элемента");
+            return;
+        }
+        int maxSum = arr[0] + arr[1] + arr[2] + arr[3];
+        for (int i = 4; i < arr.length; i++) {
+            int currentSum = arr[i - 3] + arr[i - 2] + arr[i - 1] + arr[i];
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+            }
+        }
+        System.out.println("Максимальная сумма 4 смежных чисел:" + maxSum);
+    }
 
+    // скользящее окно
+
+    public class SlidingWindow {
+        private SlidingWindow() {
+        }
+
+        private static final Logger LOGGER = Logger.getLogger(SlidingWindow.class.getName());
+        public static final int NUMBER = 4; //Число элементов массива, для поиска максимума
+
+        public static int slidingWindow(int[] arr) {
+            if (arr == null) {
+                LOGGER.warning("В метод slidingWindow передан null");
+                return 0;
+            } else if (arr.length < NUMBER) {
+                LOGGER.warning("В метод slidingWindow передан массив с длинной меньше " + NUMBER);
+                return 0;
+            } else {
+                var maxSumma = 0;
+                for (int i = 0; i < arr.length; i++) {
+                    maxSumma = i < NUMBER ? maxSumma + arr[i] : max(maxSumma, maxSumma - arr[i - NUMBER] + arr[i]);
+                }
+                String message = "Максимальная сумма четырех чисел: " + maxSumma;
+                LOGGER.info(message);
+                return maxSumma;
+            }
+        }
+    }

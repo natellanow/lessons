@@ -194,6 +194,8 @@ public class Arrays {
         String[] newColors02 = Arrays.copyOf(colors, 2); // неполные копии, кол-во элементов хотим скопировать 2 например, выход за пределы массива возможен
         // // String[] colors = {"red", "blue", null, "orange"};
         String[] newColors03 = new String[colors.length * 2]; // т.е. копирование в новый массив, массив подготавливаем изначально
+
+
         // [null, "red", "blue", null,"orange", null]
         System.arraycopy(colors, 0, newColors03, 1, 3);
         // здесь выше - сперва из какого массива копируем, потом - начиная с какого элемента копируем,

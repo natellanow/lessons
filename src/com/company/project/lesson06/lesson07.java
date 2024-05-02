@@ -1,6 +1,9 @@
 package com.company.project.lesson06;
 
 import com.company.project.lesson06.books.Author;
+import com.company.project.lesson06.books.Book;
+import com.company.project.lesson06.flowers.Bucket;
+import com.company.project.lesson06.flowers.Flower;
  /* com.company.project
     в папке src создают структуру пакетов таким образом.
     Доменное имя компании наоборот, потом название проекта
@@ -77,7 +80,7 @@ System.out.println("Author created")
 
 
  */
-public class lesson06 {
+public class lesson07 {
     public static void main(String[] args) {
         Author author01 = new Author(1);
         Author author02 = new Author();
@@ -89,5 +92,61 @@ public class lesson06 {
         Author author02 = new Author(2); //тут только id, остальные null
         Author author03 = new Author("Макар"); //тут 0, и почта null
         Author author04 = new Author(3, "Саша", "sasha@gmail.com"); //тут все значения
+        Book book01 = new Book(-1, "JDL21", -100); //такого быть не может
+        book01.price = -100; //так уже нельзя будет написать, если в классе book будет класс private
+        //т.е. ошибка доступа
+
+        /*
+        Book book01 = new Book(-1, null, -100);
+        в классе book мы написали, что не могут передаваться такие значения, но ведь книга создана?
+        она будет создана с дефолтными значениями!!!!!
+        если программа считает, что это нормально - создавать с дефолтными значениями
+        но если для нас категорически важно, чтобы книга создавалась с конкретными значениями, отличными от null
+        то такой конструктор не подойдет - Book book01 = new Book(-1, null, -100);
+        тогда тот кто вызывает конструктор должен об этом сразу узнать,
+        понять что он передает невалидные данные и где-то сверху написать проверки получше
+        чтобы в книгу передавались только валидные значения.
+        поэтому идем в конструктор и даем понять тем кто будет вызывать этот конструтор, что
+        книга либо создается с правильными значениями, либо не создается вообще
+        идем в book.java
+         */
+
+        System.out.println(book01.id); // мы не сможем получить значение, так как Id со значением private
+        //для этого создается отдельный функционал, называется getter
+
+        book01.setNumberOfPages(132); //метод вызывается и туда идет 132
+        book01.setPrice(200);
+        System.out.println(book01.getPrice());
+        Flower flower = new Flower(1,"азалия");
+        Bucket bucket = new Bucket(3);
+        bucket.getFlowers()[0] = flower;
+
+        bucket.addFlower(flower);
+
+        bucket.getFlowers()[0].setName("роза"); //это мы по ссылке на объект азалия обращаемся с целью замены на "роза"
+                //метод getFlowers возвращает ссылку на массив такого типа : Flower[]
+
+        /*
+        здесь цветок Flower flower = new Flower(1,"ромашка"); - невалидный по нашим критериям
+        (цветок не наичнается с а)
+        и есть букет
+        если бы мы воспользовались методом addFlower, то ромашка не попала бы в букет
+        но у букета есть getter
+        getter возвращает ссылку на массив, обращаемся к любому допустимому элементу массива [0]
+        и передаем туда любое значение
+        и таким образом в массив могут попасть любые цветы
+        также может попасть null ссылка - bucket.getFlowers()[0] = null;
+        getterОВ на массивы быть не должно
+
+         */
+
+        for (Flower bucketFlower : bucket.getFlowers()) {
+            bucketFlower.setId(10);
+        }
+        /*
+        bucket.getFlowers() - ссылка на массив букета,
+        bucketFlower - в этой переменной на каждой итерации цикла будет ссылка на элемент этого массива
+
+         */
     }
 }
